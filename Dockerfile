@@ -1,4 +1,4 @@
-FROM bnorrin/docker-gitlist
+FROM bnorrin/docker-gitlist:0.5.0
 
 # Change the sources for apt because libapache2-mod-authnz-external is not in the main repository
 COPY sources.list /etc/apt/sources.list
