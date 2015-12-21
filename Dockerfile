@@ -33,4 +33,10 @@ RUN a2enmod actions ;\
     a2enmod ldap ;\
     a2enmod setenvif
 
+RUN sed -i 's|LogLevel warn|LogLevel debug|g' /etc/apache2/apache2.conf
+ 
+# Listen on port 10080 instead of 80
+RUN sed -i 's|Listen 80|Listen 10080|g' /etc/apache2/apache2.conf
+EXPOSE 10080
+
 ENTRYPOINT  ["apache2ctl", "-D", "FOREGROUND"]
