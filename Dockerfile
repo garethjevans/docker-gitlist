@@ -14,12 +14,13 @@ RUN mkdir -p /home/git/repositories/ \
         && cd /home/git/repositories/ \
         && git --bare init foo
 
-RUN curl -o /tmp/gitlist.tar.gz -SL https://github.com/klaussilveira/gitlist/archive/${GITLIST_VERSION}.tar.gz \
+RUN curl -o /tmp/gitlist.tar.gz -SL https://s3.amazonaws.com/gitlist/gitlist-${GITLIST_VERSION}.tar.gz \
         && tar -xzf /tmp/gitlist.tar.gz -C /tmp/ \
-		&& mv /tmp/gitlist-${GITLIST_VERSION}/.htaccess /tmp/gitlist-${GITLIST_VERSION}/* /var/www/html/ \
-		&& rm -rf /tmp/gitlist-${GITLIST_VERSION} /tmp/gitlist.tar.gz \
+		&& mv /tmp/gitlist/.htaccess /tmp/gitlist/* /var/www/html/ \
+		&& rm -rf /tmp/gitlist /tmp/gitlist.tar.gz \
         && chown -R www-data:www-data /var/www/html/ \
         && cd /var/www/html/ \
+		&& mkdir cache \
         && chmod 777 cache \
         && cp /var/www/html/config.ini-example /var/www/html/config.ini
 
